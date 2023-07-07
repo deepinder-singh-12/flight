@@ -1,5 +1,7 @@
 import { ThemeProvider, createTheme } from "@mui/material";
 import TopBar from "./components/Layout/TopBar";
+import Tabs from "./components/Layout/TabsInfo";
+import TabsInfo from "./components/Layout/TabsInfo";
 
 function App() {
   const theme = createTheme({
@@ -15,6 +17,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <TopBar />
+      <TabsInfo />
     </ThemeProvider>
   );
 }

@@ -18,7 +18,7 @@ const SearchBar = () => {
           borderStartEndRadius: "50px",
           borderEndEndRadius: "50px",
           paddingX: "30px",
-          paddingY: "20px",
+          paddingY: "15px",
         }}
         disableUnderline={true}
         fullWidth={true}
@@ -39,6 +39,8 @@ const SearchBar = () => {
             <Button
               sx={{
                 borderRadius: "25px",
+                padding: "10px",
+                fontWeight: "bold",
               }}
               variant="contained"
               endIcon={<ArrowForwardIcon />}
