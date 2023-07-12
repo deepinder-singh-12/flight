@@ -2,7 +2,7 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import TopBar from "./components/Layout/TopBar";
 import TabsInfo from "./components/Layout/TabsInfo";
 
-function App() {
+const App = () => {
   const theme = createTheme({
     palette: {
       primary: {
@@ -19,6 +19,6 @@ function App() {
       <TabsInfo />
     </ThemeProvider>
   );
-}
+};
 
 export default App;

@@ -4,40 +4,40 @@ import SearchContext from "../../store/searchContext";
 import FlightTable from "../Feature/FlightTable";
 import { XMLParser } from "fast-xml-parser";
 import { filterFlights } from "../../helpers/fiterFlights";
+import { getData } from "../../services/fetch";
+import { getUrl } from "../../api/api";
+
 const CustomTabPanel = (props) => {
   const { value, index, ...other } = props;
   const { searchString } = useContext(SearchContext);
-  const url = `https://cors-anywhere.herokuapp.com/https://yxy.terminalsystems.com/export${
-    index === 0 ? "/arrivals_new1.xml" : "/departures_new1.xml"
-  }`;
+  const url = getUrl(index);
 
   const [date, setDate] = useState();
   const [time, setTime] = useState();
   const [flights, setFlights] = useState([]);
-
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const convertData = async () => {
     setLoading(true);
-    fetch(url, {
-      mode: "cors",
-      method: "GET",
-    })
-      .then((response) => {
-        return response.text();
-      })
-      .then((text) => {
-        const parser = new XMLParser();
-        let jObj = parser.parse(text);
-        setFlights(index === 0 ? jObj.flights.Arrival : jObj.flights.Departure);
-        setDate(jObj.flights.date);
-        setTime(jObj.flights.time);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setLoading(false);
-      });
+    try {
+      const response = await getData(url);
+      const text = await response.text();
+      const parser = new XMLParser();
+      const tempObject = parser.parse(text);
+      setFlights(
+        index === 0 ? tempObject.flights.Arrival : tempObject.flights.Departure
+      );
+      setDate(tempObject.flights.date);
+      setTime(tempObject.flights.time);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    convertData();
   }, []);
 
   const flightsArr = filterFlights(flights, searchString);
@@ -65,7 +65,9 @@ const CustomTabPanel = (props) => {
             {date} at {time}
           </Typography>
           {value === index && (
-            <FlightTable flightsArr={flightsArr ? flightsArr : flights} />
+            <FlightTable
+              flightsArr={flightsArr.length > 0 ? flightsArr : flights}
+            />
           )}
         </>
       )}
