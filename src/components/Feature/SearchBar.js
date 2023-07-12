@@ -57,6 +57,7 @@ const SearchBar = () => {
                   fontWeight: "bold",
                 }}
                 onClick={handleSearch}
+                disabled={input.length === 0}
                 variant="contained"
                 endIcon={<ArrowForwardIcon />}
               >

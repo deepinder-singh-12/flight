@@ -64,9 +64,13 @@ const CustomTabPanel = (props) => {
           >
             {date} at {time}
           </Typography>
+          <Typography variant="h5" display="block" marginY={2} color={"red"}>
+            {flightsArr?.length === 0 &&
+              "No flights related to your query. Below is list of all flights"}
+          </Typography>
           {value === index && (
             <FlightTable
-              flightsArr={flightsArr.length > 0 ? flightsArr : flights}
+              flightsArr={flightsArr?.length > 0 ? flightsArr : flights}
             />
           )}
         </>

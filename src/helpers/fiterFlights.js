@@ -8,5 +8,5 @@ export const filterFlights = (flightsArr, searchString) => {
     );
     return flights;
   }
-  return [];
+  return null;
 };
