@@ -9,25 +9,27 @@ import {
   Paper,
 } from "@mui/material";
 
+const cellStyle = { fontWeight: "bold" };
+
 const FlightTable = ({ flightsArr }) => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: "bold" }} align="left">
+            <TableCell sx={cellStyle} align="left">
               Airlines
             </TableCell>
-            <TableCell sx={{ fontWeight: "bold" }} align="left">
+            <TableCell sx={cellStyle} align="left">
               Fight
             </TableCell>
-            <TableCell sx={{ fontWeight: "bold" }} align="left">
+            <TableCell sx={cellStyle} align="left">
               Cities
             </TableCell>
-            <TableCell sx={{ fontWeight: "bold" }} align="left">
+            <TableCell sx={cellStyle} align="left">
               Arrival Time
             </TableCell>
-            <TableCell sx={{ fontWeight: "bold" }} align="left">
+            <TableCell sx={cellStyle} align="left">
               Status
             </TableCell>
           </TableRow>
